@@ -1,2 +1,2 @@
-# api
-The back-end service project created by laravel framework.
+# web
+The web serive project created by laravel framework.

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,12 +11,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    $turkey = Countries::where('name.common', 'Turkey')->first();
-
-    return $turkey->states->pluck('name', 'postal');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('register', 'API\AuthController@register')->name('api.auth.register');
+    Route::post('login', 'API\AuthController@login')->name('api.auth.login');
 });
