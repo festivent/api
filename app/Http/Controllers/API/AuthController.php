@@ -14,12 +14,19 @@ use Illuminate\Validation\ValidationException;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+/**
+ * @resource Auth
+ *
+ * The routes for using authentication.
+ */
 class AuthController extends Controller
 {
     use ThrottlesLogins;
 
     /**
-     * Register new user.
+     * Register
+     *
+     * Create a new user and get token with this user.
      *
      * @param RegisterRequest $request
      * @return UserResource
@@ -36,6 +43,10 @@ class AuthController extends Controller
     }
 
     /**
+     * Login
+     *
+     * Login a user and get token with this user.
+     *
      * @param LoginRequest $request
      * @return mixed
      * @throws \Illuminate\Validation\ValidationException
