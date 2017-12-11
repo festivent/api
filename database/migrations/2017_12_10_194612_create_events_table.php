@@ -16,6 +16,8 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             /** @noinspection PhpUndefinedMethodInspection */
+            $table->string('key', 31)->nullable()->unique();
+            /** @noinspection PhpUndefinedMethodInspection */
             $table->string('title', 127)->index();
             /** @noinspection PhpUndefinedMethodInspection */
             $table->text('description')->nullable();
@@ -27,6 +29,7 @@ class CreateEventsTable extends Migration
             $table->timestamp('ended_at')->nullable();
             /** @noinspection PhpUndefinedMethodInspection */
             $table->unsignedDecimal('price', 5, 2)->nullable();
+            /** @noinspection PhpUndefinedMethodInspection */
             $table->string('price_type', 7)->default('tl');
             /** @noinspection PhpUndefinedMethodInspection */
             $table->unsignedSmallInteger('capacity')->nullable();

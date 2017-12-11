@@ -1,5 +1,6 @@
 <?php
 
+// Genders...
 define('MALE', 'male');
 define('FEMALE', 'female');
 
@@ -16,3 +17,7 @@ if (!function_exists('genders')) {
         ]);
     }
 }
+
+// Telephone regex..
+define('MASKED_TELEPHONE_REGEX', '/^\(([0-9]{3})\) ([0-9]{3})-([0-9]{4})$/');
+define('TELEPHONE_REGEX', '/^\+([0-9]{2})([0-9]{3})([0-9]{3})([0-9]{4})$/');

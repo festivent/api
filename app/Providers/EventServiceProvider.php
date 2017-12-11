@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Event;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -29,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen('tymon.jwt.absent', function () {
+            throw new AuthenticationException();
+        });
     }
 }

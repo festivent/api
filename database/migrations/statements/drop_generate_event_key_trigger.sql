@@ -1,0 +1,1 @@
+DROP TRIGGER IF EXISTS generate_event_key_trigger ON events;

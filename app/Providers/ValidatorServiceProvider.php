@@ -23,6 +23,10 @@ class ValidatorServiceProvider extends ServiceProvider
             return genders()->contains($value);
         });
 
+        Validator::extend('telephone', function ($attribute, $value) {
+            return !!preg_match(TELEPHONE_REGEX, $value);
+        });
+
         Validator::extend('birth_at', function ($attribute, $value) {
             $diff = Carbon::now()->diff(
                 Carbon::createFromTimestamp(

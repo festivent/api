@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $address_id
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read string key
  * @property-read \App\Models\Address $address
  * @property-read \App\Models\Organizer|null $organizer
  * @property-read \App\Models\User|null $user
@@ -56,7 +57,7 @@ class Event extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id', 'organizer_id', 'address_id'
+        'key', 'user_id', 'organizer_id', 'address_id'
     ];
 
     /**
