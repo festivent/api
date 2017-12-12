@@ -27,6 +27,20 @@ class ValidatorServiceProvider extends ServiceProvider
             return !!preg_match(TELEPHONE_REGEX, $value);
         });
 
+        Validator::extend('price_type', function ($attribute, $value) {
+            return priceTypes()->contains($value);
+        });
+
+        Validator::extend('future_date', function ($attribute, $value) {
+            $diff = Carbon::now()->diff(
+                Carbon::createFromTimestamp(
+                    strtotime($value)
+                )
+            );
+
+            return !$diff->invert;
+        });
+
         Validator::extend('birth_at', function ($attribute, $value) {
             $diff = Carbon::now()->diff(
                 Carbon::createFromTimestamp(

@@ -96,4 +96,16 @@ class Event extends Model
     {
         return $this->belongsTo(Address::class, 'address_id', 'id');
     }
+
+    /**
+     * Load the show relations.
+     *
+     * @return $this
+     */
+    public function loadShow()
+    {
+        return $this->load([
+            'organizer', 'address', 'address.province', 'address.county'
+        ]);
+    }
 }

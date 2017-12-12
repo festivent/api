@@ -54,3 +54,12 @@ Route::group(['prefix' => 'addresses', 'middleware' => 'jwt.auth'], function () 
     Route::get('search', 'API\AddressController@search')->name('api.address.search');
     Route::post('create', 'API\AddressController@store')->name('api.address.store');
 });
+
+// Event Routes...
+Route::group(['prefix' => 'events', 'middleware' => 'jwt.auth'], function () {
+    Route::post('search', 'API\EventController@search')->name('api.event.search');
+    Route::post('create', 'API\EventController@store')->name('api.event.store');
+    Route::get('{event}', 'API\EventController@show')->name('api.event.show');
+    Route::put('{event}/edit', 'API\EventController@update')->middleware('can:update,event')->name('api.event.update');
+    Route::delete('{event}', 'API\EventController@destroy')->middleware('can:delete,event')->name('api.event.destroy');
+});
