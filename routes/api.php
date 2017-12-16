@@ -18,8 +18,6 @@ Route::group(['prefix' => 'auth'], function () {
 
 // User Routes...
 Route::group(['prefix' => 'users', 'middleware' => 'jwt.auth'], function () {
-    Route::get('{user}', 'API\User\UserController@show')->name('api.user.show');
-
     // Current User Routes...
     Route::group(['prefix' => 'me'], function () {
         Route::get('/', 'API\User\UserController@me')->name('api.user.me');
@@ -35,6 +33,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'jwt.auth'], function () {
         Route::get('organizers', 'API\User\OrganizerController@index')->name('api.user.me.organizer.index');
         Route::post('organizers/create', 'API\User\OrganizerController@store')->name('api.user.me.organizer.store');
     });
+
+    Route::get('{user}', 'API\User\UserController@show')->name('api.user.show');
 });
 
 // Category Routes...
