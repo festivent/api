@@ -20,10 +20,16 @@ class CategoryResource extends Resource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'id' => $this->id,
             'name' => $this->name,
             'icon' => $this->icon
         ];
+
+        if ($this->relationLoaded('children')) {
+            $data['children'] = CategoryResource::collection($this->children);
+        }
+
+        return $data;
     }
 }

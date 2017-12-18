@@ -23,7 +23,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('name')
-            ->whereNull('parent_id')->paginate();
+            ->with('children')
+            ->whereNull('parent_id')
+            ->get();
 
         return CategoryResource::collection($categories);
     }
