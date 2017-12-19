@@ -7,10 +7,10 @@ use App\Http\Requests\API\Event\SearchRequest;
 use App\Http\Requests\API\Event\StoreRequest;
 use App\Http\Requests\API\Event\UpdateRequest;
 use App\Http\Resources\EventResource;
-use App\Http\Resources\EventsCollection;
 use App\Models\Event;
 use App\Repositories\EventRepository;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Storage;
 
@@ -27,17 +27,17 @@ class EventController extends Controller
      * Search in available events.
      *
      * @param SearchRequest $request
-     * @return EventsCollection
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function search(SearchRequest $request)
     {
         $query = $request->get('query');
-        $events = EventRepository::querySearch($query)
-            ->paginate()->appends([
-                'query' => $request->get('query')
-            ]);
+        $events = EventRepository::querySearch($query)->get();
+//            ->paginate()->appends([
+//                'query' => $request->get('query')
+//            ]);
 
-        return new EventsCollection($events);
+        return EventResource::collection($events);
     }
 
     /**
@@ -55,8 +55,21 @@ class EventController extends Controller
             $attributes['image'] = $this->storeImage($image);
         }
 
+        $attributes['started_at'] = Carbon::createFromTimestamp(
+            strtotime($attributes['started_at'])
+        );
+
+        if (isset($attributes['ended_at']) AND $attributes['ended_at']) {
+            $attributes['ended_at'] = Carbon::createFromTimestamp(
+                strtotime($attributes['ended_at'])
+            );
+        }
+
         /** @var Event $event */
         $event = Auth::user()->events()->create($attributes);
+        $event->categories()->sync(
+            $request->get('category_ids') ?: []
+        );
 
         return $this->show($event);
     }
@@ -93,6 +106,11 @@ class EventController extends Controller
         $event->update(
             $attributes
         );
+
+        $event->categories()->sync(
+            $request->get('category_ids') ?: []
+        );
+
 
         return $this->show($event);
     }

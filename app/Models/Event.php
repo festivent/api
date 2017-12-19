@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Address $address
  * @property-read \App\Models\Organizer|null $organizer
  * @property-read \App\Models\User|null $user
+ * @property-read Collection|Category[] $categories
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereAddressId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereAgeLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereCapacity($value)
@@ -98,6 +100,22 @@ class Event extends Model
     }
 
     /**
+     * Event categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(
+            Category::class,
+            'event_categories',
+            'event_id',
+            'category_id',
+            'id'
+        );
+    }
+
+    /**
      * Load the show relations.
      *
      * @return $this
@@ -105,7 +123,7 @@ class Event extends Model
     public function loadShow()
     {
         return $this->load([
-            'organizer', 'address', 'address.province', 'address.county'
+            'categories', 'organizer', 'address', 'address.province', 'address.county'
         ]);
     }
 }

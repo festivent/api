@@ -33,7 +33,8 @@ class UpdateRequest extends FormRequest
             'price' => 'nullable|numeric|min:0',
             'price_type' => 'nullable|string|price_type|max:7',
             'capacity' => 'nullable|int|min:0',
-            'age_limit' => 'nullable|int|min:0'
+            'age_limit' => 'nullable|int|min:0',
+            'category_ids' => 'required|array|exists:categories,id'
         ];
     }
 }

@@ -35,7 +35,9 @@ class StoreRequest extends FormRequest
             'capacity' => 'nullable|int|min:0',
             'age_limit' => 'nullable|int|min:0',
             'address_id' => 'required|int|exists:addresses,id',
-            'organizer_id' => 'nullable|int|exists:organizers,id'
+            'organizer_id' => 'nullable|int|exists:organizers,id',
+            'category_ids' => 'required|array',
+            'category_ids.*' => 'required|int|exists:categories,id'
         ];
     }
 }

@@ -35,7 +35,8 @@ class EventResource extends Resource
             'capacity' => $this->capacity,
             'age_limit' => $this->age_limit,
             'organizer' => $this->organizer ? new OrganizerResource($this->organizer) : null,
-            'address' => new AddressResource($this->address)
+            'address' => new AddressResource($this->address),
+            'categories' => CategoryResource::collection($this->categories)
         ];
     }
 }

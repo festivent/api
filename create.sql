@@ -83,7 +83,7 @@ create table "events" (
   "started_at" timestamp(0) without time zone not null,
   "ended_at" timestamp(0) without time zone null,
   "price" decimal(5, 2) null,
-  "price_type" varchar(7) not null default 'tl',
+  "price_type" varchar(7) null default 'tl',
   "capacity" smallint null,
   "age_limit" smallint null,
   "user_id" integer null,

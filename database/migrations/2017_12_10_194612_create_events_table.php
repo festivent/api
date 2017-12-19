@@ -30,7 +30,7 @@ class CreateEventsTable extends Migration
             /** @noinspection PhpUndefinedMethodInspection */
             $table->unsignedDecimal('price', 5, 2)->nullable();
             /** @noinspection PhpUndefinedMethodInspection */
-            $table->string('price_type', 7)->default('tl');
+            $table->string('price_type', 7)->nullable()->default('tl');
             /** @noinspection PhpUndefinedMethodInspection */
             $table->unsignedSmallInteger('capacity')->nullable();
             /** @noinspection PhpUndefinedMethodInspection */

@@ -90,6 +90,7 @@ return [
     'password'             => ':attribute değeri en az bir küçük, bir büyük harf ve en az bir sayı içermelidir.',
     'gender'               => ':attribute değeri desteklenen bir cinsiyet değeri olmalıdır.',
     'birth_at'             => ':attribute 13 ile 100 yaş aralığın da bir doğum tarihi olmalıdır.',
+    'future_date'          => ':attribute değeri gelecek tarihte olmalıdır.',
 
     /*
     |--------------------------------------------------------------------------
@@ -125,7 +126,19 @@ return [
         'password' => 'Şifre',
         'password_confirmation' => 'Şifre Doğrula',
         'gender' => 'Cinsiyet',
-        'birth_at' => 'Doğum Tarihi'
+        'birth_at' => 'Doğum Tarihi',
+        'title' => 'Başlık',
+        'description' => 'Açıklama',
+        'started_at' => 'Başlangıç Tarihi',
+        'ended_at' => 'Bitiş Tarihi',
+        'capacity' => 'Kapasite',
+        'price' => 'Fiyat',
+        'age_limit' => 'Yaş Sınırı',
+        'category_ids' => 'Kategoriler',
+        'province_id' => 'İl',
+        'county_id' => 'İlçe',
+        'hint' => 'Tarif',
+        'address' => 'Adres'
     ],
 
 ];
