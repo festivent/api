@@ -57,6 +57,7 @@ Route::group(['prefix' => 'addresses', 'middleware' => 'jwt.auth'], function () 
 
 // Event Routes...
 Route::group(['prefix' => 'events', 'middleware' => 'jwt.auth'], function () {
+    Route::get('/', 'API\EventController@index')->name('api.event.index');
     Route::get('search', 'API\EventController@search')->name('api.event.search');
     Route::post('create', 'API\EventController@store')->name('api.event.store');
     Route::get('{event}', 'API\EventController@show')->name('api.event.show');

@@ -22,6 +22,21 @@ use Storage;
 class EventController extends Controller
 {
     /**
+     * List
+     *
+     * List user events by auth.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        $user = Auth::user();
+        $events = EventRepository::getUserEvents($user);
+
+        return EventResource::collection($events);
+    }
+
+    /**
      * Search
      *
      * Search in available events.

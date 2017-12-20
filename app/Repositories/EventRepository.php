@@ -3,6 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Event;
+use App\Models\User;
+use DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class EventRepository
 {
@@ -22,5 +25,22 @@ class EventRepository
         $query->orderBy('started_at', 'DESC');
 
         return $query;
+    }
+
+    public static function getUserEvents(User $user)
+    {
+        $results = DB::select('SELECT * FROM get_user_events(?)', [
+            $user->id
+        ]);
+
+        $events = new Collection();
+        foreach ($results as $result) {
+            $event = new Event();
+            $event->setRawAttributes((array) $result);
+
+            $events->push($event);
+        }
+
+        return $events;
     }
 }
